@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-2xl font-semibold mb-4">Violations</h1>
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+  <div class="grid grid-cols-6 text-sm font-semibold text-slate-600 border-b border-slate-100">
+    <div class="p-3">Snapshot</div>
+    <div class="p-3">Type</div>
+    <div class="p-3">Plate</div>
+    <div class="p-3">Confidence</div>
+    <div class="p-3">Timestamp</div>
+    <div class="p-3">Meta</div>
+  </div>
+  {% for v in violations %}
+  <div class="grid grid-cols-6 items-center text-sm text-slate-700 border-b border-slate-50">
+    <div class="p-3">
+      {% if v.snapshot %}
+      <img src="{{ v.snapshot.url }}" class="w-20 h-12 object-cover rounded border border-slate-200" />
+      {% else %}—{% endif %}
+    </div>
+    <div class="p-3">{{ v.get_violation_type_display }}</div>
+    <div class="p-3">{{ v.plate_text|default:"—" }}</div>
+    <div class="p-3">{{ v.confidence|floatformat:2 }}</div>
+    <div class="p-3">{{ v.timestamp }}</div>
+    <div class="p-3 text-xs text-slate-500 break-words">{{ v.meta }}</div>
+  </div>
+  {% empty %}
+  <div class="p-4 text-slate-500 text-sm">No violations yet.</div>
+  {% endfor %}
+</div>
+{% endblock %}

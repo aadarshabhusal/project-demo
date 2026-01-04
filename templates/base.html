@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Tailwind CDN for quick start -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme: light; }
+    body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <div class="min-h-screen flex">
+    <aside class="w-64 bg-white border-r border-slate-200 p-6 space-y-4">
+      <div class="text-xl font-semibold">Traffic Monitor</div>
+      <nav class="space-y-2">
+        <a href="{% url 'dashboard' %}" class="block px-3 py-2 rounded-lg hover:bg-slate-100 {% if request.path == '/' %}bg-slate-100{% endif %}">Dashboard</a>
+        <a href="{% url 'upload_video' %}" class="block px-3 py-2 rounded-lg hover:bg-slate-100 {% if 'upload' in request.path %}bg-slate-100{% endif %}">Upload</a>
+        <a href="{% url 'violations' %}" class="block px-3 py-2 rounded-lg hover:bg-slate-100 {% if 'violations' in request.path %}bg-slate-100{% endif %}">Violations</a>
+      </nav>
+    </aside>
+    <main class="flex-1 p-8">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl">
+  <h1 class="text-2xl font-semibold mb-2">Upload Video</h1>
+  <p class="text-slate-500 mb-6">Process an MP4/AVI file locally to detect helmet and overload violations.</p>
+  <form method="post" enctype="multipart/form-data" class="p-6 bg-white rounded-xl shadow-sm border border-slate-100 space-y-4">
+    {% csrf_token %}
+    <div>
+      <label class="block text-sm font-medium text-slate-700 mb-1">Video file</label>
+      {{ form.video }}
+    </div>
+    <button class="px-4 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800" type="submit">Start Processing</button>
+  </form>
+</div>
+{% endblock %}
